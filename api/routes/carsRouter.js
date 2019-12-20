@@ -4,7 +4,7 @@ const db = require("../../data/db");
 // GET all cars
 const getCars = async (req, res, next) => {
   try {
-    const cars = db("cars").select();
+    const cars = db("cars")
     return res.status(200).json(cars)
   } catch (error) {
     next(error)
@@ -30,8 +30,6 @@ const addCar = async (req, res, next) => {
 }
 
 carsRouter
-  .get("/", (req, res) => {
-    res.send("API is working")
-  });
+  .get("/", getCars)
 
 module.exports = carsRouter;
