@@ -14,7 +14,8 @@ const getCars = async (req, res, next) => {
 // GET car by ID
 const getCarById = async (req, res, next) => {
   try {
-
+    const car = db("cars").where({ id: req.params.id });
+    return res.status(200).json(car);
   } catch (error) {
     next(error)
   }
@@ -31,5 +32,6 @@ const addCar = async (req, res, next) => {
 
 carsRouter
   .get("/", getCars)
+  .get("/:id", getCarById)
 
 module.exports = carsRouter;
