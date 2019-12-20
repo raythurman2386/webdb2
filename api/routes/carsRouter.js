@@ -1,4 +1,5 @@
 const carsRouter = require("express").Router();
+const db = require("../../data/db");
 
 carsRouter
   .get("/", (req, res) => {
