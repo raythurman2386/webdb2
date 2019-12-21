@@ -11,9 +11,9 @@ exports.up = async function (knex) {
     table.string("vin", 128).notNull().unique();
     // required mileage
     table.integer("mileage").notNull();
-    // trans type
+    // trans type not required
     table.string("transmissionType", 128);
-    // title status
+    // title status not required
     table.string("titleStatus", 128);
   })
 };
