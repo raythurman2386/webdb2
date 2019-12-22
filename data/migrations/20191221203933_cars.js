@@ -14,7 +14,7 @@ exports.up = function(knex) {
       sales.integer("sales").notNullable();
       sales.integer("sale_price").notNullable();
       sales
-        .integer("sales_id")
+        .integer("car_id")
         .unsigned()
         .notNullable()
         .references("id")
