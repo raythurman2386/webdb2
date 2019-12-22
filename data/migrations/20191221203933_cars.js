@@ -1,7 +1,7 @@
 exports.up = function(knex) {
   return knex.schema
     .createTable("cars", cars => {
-      cars.increment();
+      cars.increments();
       cars.string("make").notNullable();
       cars.string("model").notNullable();
       cars.integer("mileage").notNullable();
@@ -12,6 +12,7 @@ exports.up = function(knex) {
     .createTable("sales", sales => {
       sales.increments();
       sales.integer("sales").notNullable();
+      sales.integer("sale_price").notNullable();
       sales
         .integer("sales_id")
         .unsigned()
