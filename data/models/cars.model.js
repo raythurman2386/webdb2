@@ -10,9 +10,22 @@ function findById(id) {
     .first();
 }
 
-function add(user) {}
+async function add(car) {
+    const payload = {
+    make: car.make,
+    model: car.model,
+    vin: car.vin,
+    mileage: car.mileage,
+    transmissionType: car.transmissionType,
+    titleStatus: car.titleStatus
+  };
 
-function update(changes, id) {}
+  const [id] = await db('cars').insert(car);
+
+  return findById(id)
+}
+
+async function update(changes, id) {}
 
 function remove(id) {}
 

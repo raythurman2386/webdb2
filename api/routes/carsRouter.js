@@ -23,17 +23,8 @@ const getCarById = async (req, res, next) => {
 
 // Create Car
 const addCar = async (req, res, next) => {
-  const payload = {
-    make: req.body.make,
-    model: req.body.model,
-    vin: req.body.vin,
-    mileage: req.body.mileage,
-    transmissionType: req.body.transmissionType,
-    titleStatus: req.body.titleStatus,
-  };
-
   try {
-    const id = await db('cars').insert(payload);
+    const id = await Cars.add(req.body);
     return res.status(201).json(id);
   } catch (error) {
     next(error);
