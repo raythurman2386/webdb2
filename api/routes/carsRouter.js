@@ -1,10 +1,10 @@
-const carsRouter = require("express").Router();
-const db = require("../../data/db");
+const carsRouter = require('express').Router();
+const Cars = require('../../data/models/cars.model');
 
 // GET all cars
 const getCars = async (req, res, next) => {
   try {
-    const cars = await db("cars");
+    const cars = await Cars.find();
     return res.status(200).json(cars);
   } catch (error) {
     next(error);
@@ -14,7 +14,7 @@ const getCars = async (req, res, next) => {
 // GET car by ID
 const getCarById = async (req, res, next) => {
   try {
-    const car = await db("cars").where({ id: req.params.id });
+    const car = await Cars.findById(req.params.id);
     return res.status(200).json(car);
   } catch (error) {
     next(error);
@@ -29,11 +29,11 @@ const addCar = async (req, res, next) => {
     vin: req.body.vin,
     mileage: req.body.mileage,
     transmissionType: req.body.transmissionType,
-    titleStatus: req.body.titleStatus
+    titleStatus: req.body.titleStatus,
   };
 
   try {
-    const id = await db("cars").insert(payload);
+    const id = await db('cars').insert(payload);
     return res.status(201).json(id);
   } catch (error) {
     next(error);
@@ -47,11 +47,11 @@ const updateCar = async (req, res, next) => {
     vin: req.body.vin,
     mileage: req.body.mileage,
     transmissionType: req.body.transmissionType,
-    titleStatus: req.body.titleStatus
+    titleStatus: req.body.titleStatus,
   };
 
   try {
-    const id = await db("cars")
+    const id = await db('cars')
       .where({ id: req.params.id })
       .update(payload);
     return res.status(201).json(id);
@@ -62,20 +62,20 @@ const updateCar = async (req, res, next) => {
 
 const deleteCar = async (req, res, next) => {
   try {
-    const deleted = await db("cars")
+    const deleted = await db('cars')
       .where({ id: req.params.id })
       .del();
-    return res.status(204).json({ message: "Account Deleted" });
+    return res.status(204).json({ message: 'Account Deleted' });
   } catch (error) {
     next(error);
   }
 };
 
 carsRouter
-  .get("/", getCars)
-  .get("/:id", getCarById)
-  .post("/", addCar)
-  .put("/:id", updateCar)
-  .delete("/:id", deleteCar);
+  .get('/', getCars)
+  .get('/:id', getCarById)
+  .post('/', addCar)
+  .put('/:id', updateCar)
+  .delete('/:id', deleteCar);
 
 module.exports = carsRouter;
