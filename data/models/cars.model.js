@@ -33,6 +33,10 @@ async function update(changes, id) {
   return findById(id);
 }
 
-function remove(id) {}
+function remove(id) {
+  return db('cars')
+    .where({ id })
+    .del();
+}
 
 module.exports = { find, findById, add, update, remove };

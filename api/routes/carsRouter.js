@@ -42,10 +42,8 @@ const updateCar = async (req, res, next) => {
 
 const deleteCar = async (req, res, next) => {
   try {
-    const deleted = await db('cars')
-      .where({ id: req.params.id })
-      .del();
-    return res.status(204).json({ message: 'Account Deleted' });
+    const deleted = await Cars.remove(req.params.id);
+    return res.status(204).json(deleted);
   } catch (error) {
     next(error);
   }
