@@ -11,21 +11,27 @@ function findById(id) {
 }
 
 async function add(car) {
-    const payload = {
+  const payload = {
     make: car.make,
     model: car.model,
     vin: car.vin,
     mileage: car.mileage,
     transmissionType: car.transmissionType,
-    titleStatus: car.titleStatus
+    titleStatus: car.titleStatus,
   };
 
   const [id] = await db('cars').insert(car);
 
-  return findById(id)
+  return findById(id);
 }
 
-async function update(changes, id) {}
+async function update(changes, id) {
+  await db('cars')
+    .where({ id })
+    .update(changes);
+
+  return findById(id);
+}
 
 function remove(id) {}
 
